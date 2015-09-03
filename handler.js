@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = function($opts) {
-    var name = $opts.item;
+    var deflt = $opts.default || null,
+        name = $opts.item;
     return function(err, $resolver, $res, $next, $finish) {
         if (err && name !== 'err') {
             $next();
@@ -9,7 +10,7 @@ module.exports = function($opts) {
         }
 
         var value = name === 'err' ? err : $resolver(name);
-        $res.json(value || null);
+        $res.json(value || deflt);
         $finish();
     };
 };

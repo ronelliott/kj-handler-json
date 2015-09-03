@@ -26,6 +26,13 @@ describe('json', function() {
         this.res.json.calledWith('foo').should.equal(true);
     });
 
+    it('should use the default value if no value is resolved', function() {
+        handler({ item: 'foo', default: 'bar' })(null, this.resolver, this.res, this.next, this.finish);
+        this.next.called.should.equal(false);
+        this.finish.called.should.equal(true);
+        this.res.json.calledWith('bar').should.equal(true);
+    });
+
     it('should skip to the next handler if err is defined and not the item to resolve', function() {
         handler({ item: 'foo' })('err', this.resolver, this.res, this.next, this.finish);
         this.next.called.should.equal(true);
