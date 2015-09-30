@@ -1,15 +1,18 @@
 'use strict';
 
+var is = require('is');
+
 module.exports = function($opts) {
     var deflt = $opts.default || null,
-        name = $opts.item;
+        item = $opts.item;
+
     return function(err, $resolver, $res, $next, $finish) {
-        if (err && name !== 'err') {
+        if (err && item !== 'err') {
             $next();
             return;
         }
 
-        var value = name === 'err' ? err : $resolver(name);
+        var value = is.string(item) ? item === 'err' ? err : $resolver(item) : item;
         $res.json(value || deflt);
         $finish();
     };

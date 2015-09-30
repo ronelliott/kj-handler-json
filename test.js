@@ -46,4 +46,9 @@ describe('json', function() {
         this.res.json.called.should.equal(true);
         this.res.json.calledWith('err').should.equal(true);
     });
+
+    it('should send the item if it is not a string', function() {
+        handler({ item: [ 'foo', 'bar' ] })(null, this.resolver, this.res, this.next, this.finish);
+        this.res.json.calledWith([ 'foo', 'bar' ]).should.equal(true);
+    });
 });
