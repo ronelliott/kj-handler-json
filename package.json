@@ -1,6 +1,6 @@
 {
   "name": "kj-handler-json",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "JSON handler for the kj webapp framework.",
   "author": "Ron Elliott <ronaldbelliott@gmail.com>",
   "license": "ISC",
